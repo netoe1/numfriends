@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - pos_perm_0
+  - pos_perm_1
+  - pos_perm_2
+  - pos_perm_3
+  - pos_perm_4
+  - pos_perm_5
   layers:
   - Default
   - TransparentFX

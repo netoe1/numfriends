@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: bf5d53d4e5280b248bef4fa7e397f7d3
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Dacherry
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 55e2d2d6336e1664a953d1c40325a2c3, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
