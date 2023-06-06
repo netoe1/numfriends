@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using UnityEditor;
 using Unity.VisualScripting;
 
@@ -14,16 +13,16 @@ using Unity.VisualScripting;
 
 public class ConfigurarItensClicaveis : MonoBehaviour
 {
-    private float amount_of_scale = 1.5f;
+    [SerializeField] private Vector2 initial_size;
+    private float amount_of_scale = 1.2f;
     private float default_scale = 1f;
-
-
     private Outline item_outline;
     private static bool item_clicado;
     private void Start()
     {
+        this.gameObject.GetComponent<RectTransform>().sizeDelta = this.initial_size;
         item_outline = this.GetComponent<Outline>();
-        item_outline.effectColor = Color.black;
+        item_outline.effectColor = UnityEngine.Color.black;
         item_clicado = false;
     }
 
@@ -54,7 +53,6 @@ public class ConfigurarItensClicaveis : MonoBehaviour
     {
         Debug.LogWarning("OnMouseClick!");
         item_clicado = !item_clicado;
-
         if (item_clicado)
         {
             gui_item_click();
@@ -65,6 +63,7 @@ public class ConfigurarItensClicaveis : MonoBehaviour
             gui_item_unclick();
             Meta_ManterAnimais.remover_clicados();   
         }
+        ConfigBoxCollider2D.update_collider(this.gameObject,true);
     }
     
     private void config_outline(bool enter) 

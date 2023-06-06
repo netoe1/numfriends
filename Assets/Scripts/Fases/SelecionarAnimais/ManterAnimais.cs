@@ -15,4 +15,5 @@ using UnityEngine.UI;
 
 public class ManterAnimais : MonoBehaviour
 {
+
 }
