@@ -6,8 +6,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-/*  Este arquivo .cs é responsável por manter os metadados da fase,
- * despoluindo visualmente, ao programador, no script controlador, encontrado nesse mesmo diretório. 
+/*      Este arquivo .cs é responsável por manter os metadados da fase,
+ *  despoluindo visualmente, ao programador, no script controlador,
+ *  encontrado nesse mesmo diretório. 
  */
 
 
@@ -47,15 +48,17 @@ public class Meta_ManterAnimais : MonoBehaviour
      *  o que pode poupar tempo na fase de testagem do app.
      *  PS: Por padrão, essa opção fica desativada.
     */
-    // private static bool animais_iguais = false;
+    //  private static bool animais_iguais = false;
 
-    /* Inicialização da variável que controla a quantidade dos animais instanciados. */
-    private static int nro_instanciar = 0;
 
-    /* Inicialização da variável que controle o limite da quantidade. */
-    private const int LMT_INSTANCIAR = 5;
+    /*  Inicialização das variáveis de controle:    */
 
-    private static int itens_clicados = 0;
+    private static int nro_instanciar = 0;   // Qtde. de animais que vão ser instanciados.
+    private const int LMT_INSTANCIAR = 5;   //  Limite dos animais possíveis.
+    private static int itens_clicados = 0;  // Itens que foram clicados pelo usuário.
+
+    
+
 
     void Start()
     {
@@ -112,6 +115,17 @@ public class Meta_ManterAnimais : MonoBehaviour
 
         return false;
     }
+
+    public static bool remover_clicados()
+    {
+        if(itens_clicados - 1 >= 0)
+        {
+            itens_clicados--;
+            return true;
+        }
+        return false;
+    }
+
    
 }
 

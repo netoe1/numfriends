@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7603491111447392006}
   - component: {fileID: 7603491111447392009}
   - component: {fileID: 7603491111447392008}
+  - component: {fileID: -810583847346709432}
   m_Layer: 5
   m_Name: item_sprite
   m_TagString: Untagged
@@ -38,8 +39,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 142.99231, y: 116.18866}
-  m_SizeDelta: {x: 529.54, y: 471.15}
+  m_AnchoredPosition: {x: 100, y: 100}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7603491111447392004
 CanvasRenderer:
@@ -116,7 +117,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -130,5 +131,19 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 540, y: 540}
+  m_Size: {x: 0.0001, y: 0.0001}
   m_EdgeRadius: 0
+--- !u!114 &-810583847346709432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7603491111447392003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c8b817267322fd408a791b943d7b6dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collider_2d: {fileID: 7603491111447392008}
+  get_enable_collider: 1
