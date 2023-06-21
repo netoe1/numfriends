@@ -14,7 +14,7 @@ using Unity.VisualScripting;
 public class ConfigurarItensClicaveis : MonoBehaviour
 {
     [SerializeField] private Vector2 initial_size;
-    private float amount_of_scale = 1.2f;
+    private float amount_of_scale = 1.5f;
     private float default_scale = 1f;
     private Outline item_outline;
     private static bool item_clicado;
@@ -28,7 +28,7 @@ public class ConfigurarItensClicaveis : MonoBehaviour
 
     private void gui_item_click()
     {
-        this.gameObject.GetComponent<RectTransform>().localScale = new Vector3(amount_of_scale, amount_of_scale, amount_of_scale);
+        this.gameObject.GetComponent<RectTransform>().localScale = new Vector3(default_scale * amount_of_scale, default_scale * amount_of_scale, default_scale * amount_of_scale);
     }
 
     private void gui_item_unclick()
@@ -56,12 +56,12 @@ public class ConfigurarItensClicaveis : MonoBehaviour
         if (item_clicado)
         {
             gui_item_click();
-            Meta_ManterAnimais.adicionar_clicados();
+            //Meta_ManterAnimais.adicionar_clicados();
         }
         else
         {
             gui_item_unclick();
-            Meta_ManterAnimais.remover_clicados();   
+            //Meta_ManterAnimais.remover_clicados();   
         }
         ConfigBoxCollider2D.update_collider(this.gameObject,true);
     }
@@ -70,10 +70,10 @@ public class ConfigurarItensClicaveis : MonoBehaviour
     {
         if (enter)
         {
-            item_outline.effectDistance = new Vector2(5f,5f);
+            item_outline.effectDistance = new Vector2(item_outline.effectDistance.x * amount_of_scale, item_outline.effectDistance.y * amount_of_scale);
             return;
         }
 
-        item_outline.effectDistance = new Vector2(2.5f, 2.5f);
+        item_outline.effectDistance = new Vector2(default_scale, default_scale) ;
     }
 }
