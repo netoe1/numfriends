@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 public class ConfigurarFase
 {
     private string NOME_CENA { get; set; }
-    private int LIMITE_FASE { get; set; }
-    private int fase_atual { get; set; } = 1;
+    public int LIMITE_FASE { get; set; }
+    public int fase_atual { get; set; } = 1;
 
     public ConfigurarFase(int __limite_fase,string nome_cena)
     {

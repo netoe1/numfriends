@@ -511,7 +511,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: item_sprite (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7603491111447392008, guid: 10c6ef9d5a5cf384487f35d1b033bc4c, type: 3}
+    - {fileID: -810583847346709432, guid: 10c6ef9d5a5cf384487f35d1b033bc4c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 10c6ef9d5a5cf384487f35d1b033bc4c, type: 3}
 --- !u!224 &219162412 stripped
 RectTransform:
@@ -777,6 +779,7 @@ GameObject:
   - component: {fileID: 1198601244}
   - component: {fileID: 1198601243}
   - component: {fileID: 1198601242}
+  - component: {fileID: 1198601246}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -867,6 +870,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1198601246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198601241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b59ab8fa9c9c49f4fa0ad30de3347388, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GetHud: {fileID: 852394934}
+  obj:
+  - {fileID: 78480578}
+  - {fileID: 1458019746}
+  - {fileID: 219162413}
 --- !u!1 &1356043631
 GameObject:
   m_ObjectHideFlags: 0
@@ -878,7 +898,6 @@ GameObject:
   - component: {fileID: 1356043632}
   - component: {fileID: 1356043634}
   - component: {fileID: 1356043633}
-  - component: {fileID: 1356043635}
   m_Layer: 5
   m_Name: panel_instanciar
   m_TagString: Untagged
@@ -947,22 +966,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1356043631}
   m_CullTransparentMesh: 1
---- !u!114 &1356043635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1356043631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b59ab8fa9c9c49f4fa0ad30de3347388, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obj:
-  - {fileID: 78480578}
-  - {fileID: 1458019746}
-  - {fileID: 219162413}
 --- !u!1001 &1458019744
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1057,6 +1060,14 @@ PrefabInstance:
     - target: {fileID: 7603491111447392003, guid: 10c6ef9d5a5cf384487f35d1b033bc4c, type: 3}
       propertyPath: m_Name
       value: item_sprite (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7603491111447392009, guid: 10c6ef9d5a5cf384487f35d1b033bc4c, type: 3}
+      propertyPath: initial_size.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7603491111447392009, guid: 10c6ef9d5a5cf384487f35d1b033bc4c, type: 3}
+      propertyPath: initial_size.y
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10c6ef9d5a5cf384487f35d1b033bc4c, type: 3}
