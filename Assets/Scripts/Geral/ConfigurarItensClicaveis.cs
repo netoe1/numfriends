@@ -16,7 +16,7 @@ public class ConfigurarItensClicaveis :
     MonoBehaviour
 {
     [SerializeField] private Vector2 initial_size;
-    private float amount_of_scale = 1.5f;
+    private float amount_of_scale = 1.2f;
     private float default_scale = 1f;
     private Outline item_outline;
     private bool item_clicado;
@@ -26,6 +26,7 @@ public class ConfigurarItensClicaveis :
         item_outline = this.GetComponent<Outline>();
         item_outline.effectColor = UnityEngine.Color.black;
         item_clicado = false;
+        this.gameObject.GetComponent<Image>().color = UnityEngine.Color.black;
         gui_item_unclick();
     }
 
@@ -57,6 +58,7 @@ public class ConfigurarItensClicaveis :
             item_clicado = !item_clicado;
             if (item_clicado)
             {
+                this.gameObject.GetComponent<Image>().color = UnityEngine.Color.white;
                 gui_item_click();
                 ControllerSelecionarAnimais.external_adicionarClicado();
                 //ConfigBoxCollider2D.update_collider(this.gameObject, amount_of_scale, true);
@@ -64,6 +66,7 @@ public class ConfigurarItensClicaveis :
             }
             else
             {
+                this.gameObject.GetComponent<Image>().color = UnityEngine.Color.black;
                 gui_item_unclick();
                 ControllerSelecionarAnimais.external_removerClicado();
                 //ConfigBoxCollider2D.reset_size(this.gameObject);

@@ -9,8 +9,8 @@ public class ConfigurarFase
 
     public ConfigurarFase(int __limite_fase,string nome_cena)
     {
-        LIMITE_FASE = __limite_fase;
-        NOME_CENA= nome_cena;
+        this.LIMITE_FASE = __limite_fase;
+        this.NOME_CENA = nome_cena;
     }
 
     public void passarFase()

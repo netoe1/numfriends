@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
+using UnityEditor.Build.Content;
 using UnityEditor.SceneManagement;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -40,10 +43,9 @@ public class ReprodutorSom
         }
         else
         {
-           this.reprodutorAudioError("O gameobject atrelado não possui audio source");
-           this.reprodutorAudioWarning("A API irá adicionar um audio source automaticamente.");
-           addAudioSource();
-        
+            this.reprodutorAudioError("O gameobject atrelado não possui audio source");
+            this.reprodutorAudioWarning("A API irá adicionar um audio source automaticamente.");
+            addAudioSource();
         }
     }
 
@@ -74,12 +76,16 @@ public class ReprodutorSom
 };
 public class ControllerItensClicados
 {
+    private static bool passarDeFase;
     public int itens_clicados { get; set; }
-    private int LIMITE_CLICAR;
-    public ControllerItensClicados(int lIMITE_CLICAR)
+    public int itens_limite_fase { get;set; }
+    private int LIMITE_CLICAR { get; set; }
+    public ControllerItensClicados(int itens_limite_fase,int LIMITE_CLICAR)
     {
+        passarDeFase = false;
         this.itens_clicados = 0;
-        LIMITE_CLICAR = lIMITE_CLICAR;
+        this.itens_limite_fase = itens_limite_fase;
+        this.LIMITE_CLICAR = LIMITE_CLICAR;
     }
 
     public void removerItensClicados()
@@ -122,10 +128,20 @@ public class ControllerItensClicados
 
     public void updateHud(Text text)
     {
-        text.text = (this.LIMITE_CLICAR - this.itens_clicados).ToString();
+        text.text = (this.itens_limite_fase - this.itens_clicados).ToString();
     }
-}
 
+    public static void setPassarDeFase()
+    {
+       passarDeFase = true;
+    }
+
+    public static bool getPassarDeFase()
+    {
+        return passarDeFase;
+    }
+   
+}
 /*Script Principal*/
 public class ControllerSelecionarAnimais :
     MonoBehaviour
@@ -139,6 +155,9 @@ public class ControllerSelecionarAnimais :
     [SerializeField] private Text GetHud;
     [SerializeField] private List<GameObject> obj;
     [SerializeField] private static Text hud_text;
+    [SerializeField] private GameObject popup;
+    [SerializeField] private Button botao_sair;
+    [SerializeField] private Button botao_menu;
 
 
     /*Objetos auxiliáres*/
@@ -147,15 +166,16 @@ public class ControllerSelecionarAnimais :
     private SortearAnimal sortearAnimalInstanciar = new SortearAnimal();
     private ConfigurarFase ctrlFase = new ConfigurarFase(5,"selecionar_animais");
     private SpritePath path_sprites = new SpritePath("All/sprites_beadapt/Animais",null,"Selecionar Animais");
-    private ReprodutorSom reproduzirSom;
+    //private ReprodutorSom reproduzirSom;
 
     void Start()
     {
+        
         gameobject_ext = this.gameObject;
         hud_text = GetHud;
 
-        reproduzirSom = new ReprodutorSom("sdds",gameobject_ext);
-        reproduzirSom.reproduzirArquivo("teu cu");
+       // reproduzirSom = new ReprodutorSom("sdds",gameobject_ext);
+       // reproduzirSom.reproduzirArquivo("testezao");
 
         sortearAnimalInstanciar.sortearAnimal();
         //path_sprites.spriteLog();
@@ -170,20 +190,6 @@ public class ControllerSelecionarAnimais :
         controllerLog();
         
     }
-
-    void hudConfig()
-    {
-        hud_text = GetHud;
-        itensClicados = new ControllerItensClicados(obj.Count);
-    }
-
-
-    void controllerLog()
-    {
-        Debug.Log("CONTROLLER:Fase Atual ->" + ctrlFase.fase_atual);
-        Debug.Log("CONTROLLER:OBJ Instanciados ->" + obj.Count);
-    }
-
     /*
         API para outras classes.
      */
@@ -200,5 +206,26 @@ public class ControllerSelecionarAnimais :
         itensClicados.verItensClicados();
         itensClicados.updateHud(hud_text);
     }
+    
+    /* Métodos para componentes externos .*/
 
+    void hudConfig()
+    {
+        hud_text = GetHud;
+        itensClicados = new ControllerItensClicados(sortearNroDeItensParaClicar(),obj.Count);
+    }
+
+    void controllerLog()
+    {
+        Debug.Log("CONTROLLER:Fase Atual ->" + ctrlFase.fase_atual);
+        Debug.Log("CONTROLLER:OBJ Instanciados ->" + obj.Count);
+    }
+
+    int sortearNroDeItensParaClicar()
+    {
+        int retorno;
+        System.Random rnd = new System.Random();
+        retorno = rnd.Next(obj.Count / 2, obj.Count - 2);
+        return retorno;
+    }
 }
