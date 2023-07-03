@@ -30,7 +30,7 @@ public class ReprodutorSom
         if (audioSource != null)
         {
             this.reprodutorAudioLog("O gameobject atrelado possui audiosource");
-            audioSource.clip = Resources.Load<AudioClip>(filename);
+            audioSource.clip = Resources.Load<AudioClip>( this.PATHPASTA_AUDIOS + '/' + filename);
             if(audioSource.clip != null)
             {
                 audioSource.Play();
@@ -46,6 +46,7 @@ public class ReprodutorSom
             this.reprodutorAudioError("O gameobject atrelado não possui audio source");
             this.reprodutorAudioWarning("A API irá adicionar um audio source automaticamente.");
             addAudioSource();
+            reproduzirArquivo(filename);
         }
     }
 
@@ -83,7 +84,7 @@ public class ControllerItensClicados
     public ControllerItensClicados(int itens_limite_fase,int LIMITE_CLICAR)
     {
         passarDeFase = false;
-        this.itens_clicados = 0;
+        itens_clicados = 0;
         this.itens_limite_fase = itens_limite_fase;
         this.LIMITE_CLICAR = LIMITE_CLICAR;
     }
@@ -128,7 +129,7 @@ public class ControllerItensClicados
 
     public void updateHud(Text text)
     {
-        text.text = (this.itens_limite_fase - this.itens_clicados).ToString();
+        text.text = (this.itens_limite_fase - itens_clicados).ToString();
     }
 
     public static void setPassarDeFase()
@@ -157,7 +158,9 @@ public class ControllerSelecionarAnimais :
     [SerializeField] private static Text hud_text;
     [SerializeField] private GameObject popup;
     [SerializeField] private Button botao_sair;
-    [SerializeField] private Button botao_menu;
+    [SerializeField] private Button botao_verificar;
+
+    private static GameObject thisStatic;
 
 
     /*Objetos auxiliáres*/
@@ -166,16 +169,23 @@ public class ControllerSelecionarAnimais :
     private SortearAnimal sortearAnimalInstanciar = new SortearAnimal();
     private ConfigurarFase ctrlFase = new ConfigurarFase(5,"selecionar_animais");
     private SpritePath path_sprites = new SpritePath("All/sprites_beadapt/Animais",null,"Selecionar Animais");
-    //private ReprodutorSom reproduzirSom;
+    private static ReprodutorSom reproduzirSom;
 
     void Start()
     {
-        
+
+        // Adicionar escuta ao botão
+
+        botao_verificar.onClick.AddListener(delegate ()
+        {
+            verificarFase();
+        });
+
+
         gameobject_ext = this.gameObject;
         hud_text = GetHud;
 
-       // reproduzirSom = new ReprodutorSom("sdds",gameobject_ext);
-       // reproduzirSom.reproduzirArquivo("testezao");
+        reproduzirSom = new ReprodutorSom("Sounds/Contagem", gameobject_ext);
 
         sortearAnimalInstanciar.sortearAnimal();
         //path_sprites.spriteLog();
@@ -199,15 +209,18 @@ public class ControllerSelecionarAnimais :
         itensClicados.acrescentarItensClicados();
         itensClicados.verItensClicados();
         itensClicados.updateHud(hud_text);
+        //Debug.LogWarning(itensClicados.itens_clicados.ToString());
+        reproduzirSom.reproduzirArquivo(itensClicados.itens_clicados.ToString());
     }
     public static void external_removerClicado()
     {
         itensClicados.removerItensClicados();
         itensClicados.verItensClicados();
         itensClicados.updateHud(hud_text);
+        reproduzirSom.reproduzirArquivo(itensClicados.itens_clicados.ToString());
     }
     
-    /* Métodos para componentes externos .*/
+    /* Métodos para componentes .*/
 
     void hudConfig()
     {
@@ -228,4 +241,15 @@ public class ControllerSelecionarAnimais :
         retorno = rnd.Next(obj.Count / 2, obj.Count - 2);
         return retorno;
     }
+
+    bool verificarFase()
+    {
+        if(itensClicados.itens_clicados == itensClicados.itens_limite_fase)
+        {
+            Debug.Log("Passar de fase!");
+            return true;
+        }
+        return false;
+    }
+
 }
