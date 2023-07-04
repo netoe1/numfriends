@@ -187,7 +187,10 @@ public class ControllerSelecionarAnimais :
 
         reproduzirSom = new ReprodutorSom("Sounds/Contagem", gameobject_ext);
 
-        sortearAnimalInstanciar.sortearAnimal();
+        sortearAnimalInstanciar.addAnimaisPadrao("fazenda");
+        sortearAnimalInstanciar.sortearAnimal("fazenda");
+
+
         //path_sprites.spriteLog();
         this.hudConfig();
         itensClicados.updateHud(hud_text);
