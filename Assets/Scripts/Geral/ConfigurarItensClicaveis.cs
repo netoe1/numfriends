@@ -15,6 +15,11 @@ using UnityEngine.EventSystems;
 public class ConfigurarItensClicaveis :
     MonoBehaviour
 {
+    // Controlador de som 
+
+    ReprodutorSom reprodutorSom;
+
+
     [SerializeField] private Vector2 initial_size;
     private float amount_of_scale = 1.2f;
     private float default_scale = 1f;
@@ -22,6 +27,9 @@ public class ConfigurarItensClicaveis :
     private bool item_clicado;
     void Start()
     {
+        //Configurando controlador de som
+
+        reprodutorSom = new ReprodutorSom("Sounds/Contagem",this.gameObject);
         this.gameObject.GetComponent<RectTransform>().sizeDelta = this.initial_size;
         item_outline = this.GetComponent<Outline>();
         item_outline.effectColor = UnityEngine.Color.black;
@@ -73,6 +81,13 @@ public class ConfigurarItensClicaveis :
                 //Meta_ManterAnimais.remover_clicados();   
             }
             //status();
+
+           
+            if(int.Parse(ControllerSelecionarAnimais.external_getTextHud()) > 0)
+            {
+                reprodutorSom.reproduzirArquivo(ControllerSelecionarAnimais.external_getTextHud());
+            }
+            
         }
     }
     void OnMouseEnter()

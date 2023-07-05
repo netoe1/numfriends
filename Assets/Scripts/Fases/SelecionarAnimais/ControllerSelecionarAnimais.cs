@@ -7,6 +7,7 @@ using UnityEditor.SceneManagement;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /*Classe auxiliar*/
 
@@ -43,7 +44,7 @@ public class ReprodutorSom
         }
         else
         {
-            this.reprodutorAudioError("O gameobject atrelado não possui audio source");
+            this.reprodutorAudioWarning("O gameobject atrelado não possui audio source");
             this.reprodutorAudioWarning("A API irá adicionar um audio source automaticamente.");
             addAudioSource();
             reproduzirArquivo(filename);
@@ -77,6 +78,9 @@ public class ReprodutorSom
 };
 public class ControllerItensClicados
 {
+
+    
+
     private static bool passarDeFase;
     public int itens_clicados { get; set; }
     public int itens_limite_fase { get;set; }
@@ -147,6 +151,15 @@ public class ControllerItensClicados
 public class ControllerSelecionarAnimais :
     MonoBehaviour
 {
+    /* Controlador de inicialização*/
+
+    int indice_repete_fase = 0;
+
+
+    [SerializeField] private string nomeCena;
+    [SerializeField] private string tipoFase;
+    [SerializeField] private string proximaCena;
+
     /*Variáveis auxiliares*/
     private static GameObject gameobject_ext;
 
@@ -160,19 +173,20 @@ public class ControllerSelecionarAnimais :
     [SerializeField] private Button botao_sair;
     [SerializeField] private Button botao_verificar;
 
-    private static GameObject thisStatic;
-
-
     /*Objetos auxiliáres*/
 
     private static ControllerItensClicados itensClicados;
     private SortearAnimal sortearAnimalInstanciar = new SortearAnimal();
-    private ConfigurarFase ctrlFase = new ConfigurarFase(5,"selecionar_animais");
-    private SpritePath path_sprites = new SpritePath("All/sprites_beadapt/Animais",null,"Selecionar Animais");
-    private static ReprodutorSom reproduzirSom;
+    private ConfigurarFase ctrlFase;
+    private SpritePath path_sprites;
 
     void Start()
     {
+
+        // Criando os controladores auxiliares
+
+        ctrlFase = new ConfigurarFase(5, nomeCena);
+        path_sprites = new SpritePath("All/sprites_beadapt/Animais", null, "Selecionar Animais");
 
         // Adicionar escuta ao botão
 
@@ -185,11 +199,9 @@ public class ControllerSelecionarAnimais :
         gameobject_ext = this.gameObject;
         hud_text = GetHud;
 
-        reproduzirSom = new ReprodutorSom("Sounds/Contagem", gameobject_ext);
 
         sortearAnimalInstanciar.addAnimaisPadrao("fazenda");
         sortearAnimalInstanciar.sortearAnimal("fazenda");
-
 
         //path_sprites.spriteLog();
         this.hudConfig();
@@ -213,14 +225,16 @@ public class ControllerSelecionarAnimais :
         itensClicados.verItensClicados();
         itensClicados.updateHud(hud_text);
         //Debug.LogWarning(itensClicados.itens_clicados.ToString());
-        reproduzirSom.reproduzirArquivo(itensClicados.itens_clicados.ToString());
     }
     public static void external_removerClicado()
     {
         itensClicados.removerItensClicados();
         itensClicados.verItensClicados();
         itensClicados.updateHud(hud_text);
-        reproduzirSom.reproduzirArquivo(itensClicados.itens_clicados.ToString());
+    }
+    public static string external_getTextHud()
+    {
+        return hud_text.text;
     }
     
     /* Métodos para componentes .*/
@@ -247,8 +261,24 @@ public class ControllerSelecionarAnimais :
 
     bool verificarFase()
     {
+
         if(itensClicados.itens_clicados == itensClicados.itens_limite_fase)
         {
+            if(indice_repete_fase != 2)
+            {
+                ctrlFase.acrescentarFase();
+                indice_repete_fase++;
+                return true;
+            }
+
+            indice_repete_fase = 0;
+
+            if(proximaCena != null)
+            {
+                SceneManager.LoadScene(proximaCena);
+                return true;
+            }
+
             Debug.Log("Passar de fase!");
             return true;
         }

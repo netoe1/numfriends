@@ -1454,6 +1454,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b59ab8fa9c9c49f4fa0ad30de3347388, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nomeCena: fase01
+  tipoFase: fazenda
+  proximaCena: fase02
   GetHud: {fileID: 227319774}
   obj:
   - {fileID: 855638310}
