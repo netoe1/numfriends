@@ -8,6 +8,7 @@ using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 
 /*Classe auxiliar*/
 
@@ -151,11 +152,11 @@ public class ControllerItensClicados
 public class ControllerSelecionarAnimais :
     MonoBehaviour
 {
+
+
     /* Controlador de inicialização*/
 
     int indice_repete_fase = 0;
-
-
     [SerializeField] private string nomeCena;
     [SerializeField] private string tipoFase;
     [SerializeField] private string proximaCena;
@@ -200,8 +201,8 @@ public class ControllerSelecionarAnimais :
         hud_text = GetHud;
 
 
-        sortearAnimalInstanciar.addAnimaisPadrao("fazenda");
-        sortearAnimalInstanciar.sortearAnimal("fazenda");
+        sortearAnimalInstanciar.addAnimaisPadrao(tipoFase);
+        sortearAnimalInstanciar.sortearAnimal(tipoFase);
 
         //path_sprites.spriteLog();
         this.hudConfig();
@@ -259,8 +260,9 @@ public class ControllerSelecionarAnimais :
         return retorno;
     }
 
-    bool verificarFase()
-    {
+    async void verificarFase()
+    {   
+        ReprodutorSom aux = new ReprodutorSom("Sounds/Geral",this.gameObject);
 
         if(itensClicados.itens_clicados == itensClicados.itens_limite_fase)
         {
@@ -268,21 +270,30 @@ public class ControllerSelecionarAnimais :
             {
                 ctrlFase.acrescentarFase();
                 indice_repete_fase++;
-                return true;
+                await Task.Delay(500);
+                aux.reproduzirArquivo("muito_bem");
+                await Task.Delay(1000);
+                return;
             }
 
             indice_repete_fase = 0;
 
             if(proximaCena != null)
             {
+                
+  
                 SceneManager.LoadScene(proximaCena);
-                return true;
+                return;
             }
 
             Debug.Log("Passar de fase!");
-            return true;
+            return;
+           
         }
-        return false;
+        await Task.Delay(500);
+        aux.reproduzirArquivo("tentar_novamente");
+        await Task.Delay(1000);
+        return;
     }
 
 }

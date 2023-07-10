@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEditor;
 using Unity.VisualScripting;
 using UnityEngine.EventSystems;
+using UnityEngine.Networking;
 
 /*
  * Este script é resposável por configurar os itens clicáveis das fases, 
@@ -83,7 +84,7 @@ public class ConfigurarItensClicaveis :
             //status();
 
            
-            if(int.Parse(ControllerSelecionarAnimais.external_getTextHud()) > 0)
+            if(int.Parse(ControllerSelecionarAnimais.external_getTextHud()) >= 0)
             {
                 reprodutorSom.reproduzirArquivo(ControllerSelecionarAnimais.external_getTextHud());
             }
