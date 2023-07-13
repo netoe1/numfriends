@@ -261,7 +261,8 @@ public class ControllerSelecionarAnimais :
     }
 
     async void verificarFase()
-    {   
+    {
+        const int tempoDelay = 1000;
         ReprodutorSom aux = new ReprodutorSom("Sounds/Geral",this.gameObject);
 
         if(itensClicados.itens_clicados == itensClicados.itens_limite_fase)
@@ -270,9 +271,9 @@ public class ControllerSelecionarAnimais :
             {
                 ctrlFase.acrescentarFase();
                 indice_repete_fase++;
-                await Task.Delay(500);
-                aux.reproduzirArquivo("muito_bem");
-                await Task.Delay(1000);
+                await Task.Delay(tempoDelay / 2);
+                aux.reproduzirArquivo("acerto_complemento");
+                await Task.Delay(tempoDelay);
                 return;
             }
 
@@ -290,9 +291,9 @@ public class ControllerSelecionarAnimais :
             return;
            
         }
-        await Task.Delay(500);
-        aux.reproduzirArquivo("tentar_novamente");
-        await Task.Delay(1000);
+        await Task.Delay(tempoDelay / 2);
+        aux.reproduzirArquivo("erro_complemento");
+        await Task.Delay(tempoDelay);
         return;
     }
 
