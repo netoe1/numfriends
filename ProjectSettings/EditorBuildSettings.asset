@@ -11,7 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Fases/0-10/fase01.unity
     guid: bed9498743107a24a9d59a2a0427acbb
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/Fases/0-10/fase02.unity
-    guid: 6aef69623afa4cb4a9945b4ddb013e14
+    path: Assets/Scenes/Fases/FasesLineares/fase01_linear.unity
+    guid: cc93f2e5269a6764689d55cefe8fd541
+  - enabled: 1
+    path: Assets/Scenes/Fases/FasesLineares/fase02_linear.unity
+    guid: 468eeb855a275ee4590340e851856d15
   m_configObjects: {}

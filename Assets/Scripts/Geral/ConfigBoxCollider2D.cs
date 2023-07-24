@@ -21,7 +21,7 @@ public class ConfigBoxCollider2D : MonoBehaviour
     public static void update_collider(GameObject gameObject_with_collider2D,float scaleFactor, bool active)
     {
         gameObject_with_collider2D.GetComponent<BoxCollider2D>().enabled = active;
-        gameObject_with_collider2D.GetComponent<BoxCollider2D>().size = new Vector2 (gameObject_with_collider2D.GetComponent<RectTransform>().sizeDelta.x * scaleFactor, gameObject_with_collider2D.GetComponent<RectTransform>().sizeDelta.y * scaleFactor);
+        gameObject_with_collider2D.GetComponent<BoxCollider2D>().size = new Vector2 (gameObject_with_collider2D.GetComponent<RectTransform>().rect.width, gameObject_with_collider2D.GetComponent<RectTransform>().rect.height);
     }
 
     public static void reset_size(GameObject gameObject_with_collider2D)
