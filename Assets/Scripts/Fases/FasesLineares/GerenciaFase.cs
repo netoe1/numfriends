@@ -75,6 +75,7 @@ public class GerenciaFase : MonoBehaviour
             await Task.Delay(4000);
             SceneManager.LoadScene(proxCena_static);
             qtdClicados = 0;
+            return;
         }
 
         await Task.Delay(250);
