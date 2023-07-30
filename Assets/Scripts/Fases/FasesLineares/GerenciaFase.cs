@@ -60,7 +60,7 @@ public class GerenciaFase : MonoBehaviour
     public static async void passarFase()
     {
         if (btnPassarFase_static.GetComponent<AudioSource>() == null)
-        {
+        { 
             btnPassarFase_static.AddComponent<AudioSource>();
         }
 

@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -19,6 +17,11 @@ public class LevelSelector : MonoBehaviour
         {
             SceneManager.LoadScene(scene_to_redirect.name.ToString());
         });
+    }
+
+    public void SairDoJogo()
+    {
+        Application.Quit();
     }
     
 }

@@ -1,10 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Unity.VisualScripting;
-using UnityEditor.Build.Content;
-using UnityEditor.SceneManagement;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -79,9 +73,6 @@ public class ReprodutorSom
 };
 public class ControllerItensClicados
 {
-
-    
-
     private static bool passarDeFase;
     public int itens_clicados { get; set; }
     public int itens_limite_fase { get;set; }

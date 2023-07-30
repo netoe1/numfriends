@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
-using UnityEditor.iOS.Extensions.Common;
 using UnityEngine;
 using UnityEngine.UI;
 public class ButtonInteration : MonoBehaviour
